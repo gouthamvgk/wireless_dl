@@ -29,7 +29,7 @@ rate = bits/num_channels
 no_epochs =200
 batch_size = 200
 
-com_system = comm_4_1(N_symbols, num_channels, rate, batch_size)
+com_system = comm_4_1(N_symbols, num_channels, rate, batch_size, hidden_neurons=hidden_neurons)
 com_system = com_system.to(device)
 optimizer = optim.Adam(com_system.parameters(), lr = 0.0001)
 criterion = nn.CrossEntropyLoss()

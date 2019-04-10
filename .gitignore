@@ -1,1 +1,2 @@
 ./files/*.pth
+__pycache__/

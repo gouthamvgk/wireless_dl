@@ -9,7 +9,7 @@ from noise import GaussianNoise, Noise_1, Noise_2
 import os
 
 class comm_4_1(nn.Module):
-    def __init__(self, num_sym, num_chan, rate, batch_size = 200, train_snr = 7):
+    def __init__(self, num_sym, num_chan, rate, batch_size = 200, train_snr = 7, hidden_neurons=50):
         super(comm_4_1, self).__init__()
         self.num_symbols = num_sym
         self.num_channels = num_chan
@@ -46,7 +46,7 @@ class comm_4_1(nn.Module):
         return rec_out
 
 class comm_4_2(nn.Module):
-    def __init__(self, num_sym, num_chan, rate, batch_size = 200, train_snr = 7):
+    def __init__(self, num_sym, num_chan, rate, batch_size = 200, train_snr = 7, hidden_neurons=50):
         super(comm_4_2, self).__init__()
         self.num_symbols = num_sym
         self.num_channels = num_chan
@@ -84,7 +84,7 @@ class comm_4_2(nn.Module):
 
 
 class comm_16_1(nn.Module):
-    def __init__(self, num_sym, num_chan, rate, batch_size = 200, train_snr = 7):
+    def __init__(self, num_sym, num_chan, rate, batch_size = 200, train_snr = 7, hidden_neurons=100):
         super(comm_16_1, self).__init__()
         self.num_symbols = num_sym
         self.num_channels = num_chan
@@ -122,7 +122,7 @@ class comm_16_1(nn.Module):
 
 
 class comm_16_2(nn.Module):
-    def __init__(self, num_sym, num_chan, rate, batch_size = 200, train_snr = 7):
+    def __init__(self, num_sym, num_chan, rate, batch_size = 200, train_snr = 7, hidden_neurons=100):
         super(comm_16_2, self).__init__()
         self.num_symbols = num_sym
         self.num_channels = num_chan
