@@ -24,7 +24,7 @@ class GaussianNoise(nn.Module):
 
 class Noise_1(nn.Module):
     def __init__(self, size, std, mean = 0):
-        super(Noise, self).__init__()
+        super(Noise_1, self).__init__()
         self.mean = mean
         self.std = std
         self.value = torch.zeros(size).to(device)
@@ -43,7 +43,7 @@ class Noise_1(nn.Module):
 
 class Noise_2(nn.Module):
     def __init__(self, size, std, mean = 0):
-        super(Noise, self).__init__()
+        super(Noise_2, self).__init__()
         self.mean = mean
         self.std = std
         self.value = torch.zeros(size).to(device)
