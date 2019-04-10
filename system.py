@@ -10,7 +10,7 @@ import os
 
 class comm_4_1(nn.Module):
     def __init__(self, num_sym, num_chan, rate, batch_size = 200, train_snr = 7):
-        super(comm, self).__init__()
+        super(comm_4_1, self).__init__()
         self.num_symbols = num_sym
         self.num_channels = num_chan
         self.Ebno = 10.0**(train_snr/10.0)  #db eqivalent
@@ -47,7 +47,7 @@ class comm_4_1(nn.Module):
 
 class comm_4_2(nn.Module):
     def __init__(self, num_sym, num_chan, rate, batch_size = 200, train_snr = 7):
-        super(comm, self).__init__()
+        super(comm_4_2, self).__init__()
         self.num_symbols = num_sym
         self.num_channels = num_chan
         self.Ebno = 10.0**(train_snr/10.0)  #db eqivalent
@@ -85,7 +85,7 @@ class comm_4_2(nn.Module):
 
 class comm_16_1(nn.Module):
     def __init__(self, num_sym, num_chan, rate, batch_size = 200, train_snr = 7):
-        super(comm, self).__init__()
+        super(comm_16_1, self).__init__()
         self.num_symbols = num_sym
         self.num_channels = num_chan
         self.Ebno = 10.0**(train_snr/10.0)  #db eqivalent
@@ -123,7 +123,7 @@ class comm_16_1(nn.Module):
 
 class comm_16_2(nn.Module):
     def __init__(self, num_sym, num_chan, rate, batch_size = 200, train_snr = 7):
-        super(comm, self).__init__()
+        super(comm_16_2, self).__init__()
         self.num_symbols = num_sym
         self.num_channels = num_chan
         self.flag = 0

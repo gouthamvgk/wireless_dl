@@ -108,3 +108,13 @@ for k in range(len(Ebno_range_snr)):
     no_error = torch.sum(no_error).item()
     ber[k] = no_error/test_N
     print('SNR->{} BER->{}'.format(Ebno_range_snr[k], ber[k]))
+
+name = 'S2_16S_Autoencoder({},{})_comp'.format(num_channels, bits)
+plt.plot(Ebno_range_snr, ber, 'y',label=name)
+plt.yscale('log')
+plt.xlabel('SNR Range')
+plt.ylabel('Block Error Rate')
+plt.grid()
+plt.legend(loc='upper right')
+plt.savefig(os.path.join(os.getcwd(),'files', name))
+plt.show()
