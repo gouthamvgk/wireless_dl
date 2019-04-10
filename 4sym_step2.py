@@ -73,7 +73,8 @@ for epoch in range(no_epochs):
 
 trans.load_state(com_system.lin1, com_system.lin2,com_system.lin3, com_system.lin_c, com_system.norm1)
 recv.load_state(com_system.lin4, com_system.lin5, com_system.lin6)
-
+na = 'step2_4sym_final.pth'
+torch.save({'model':com_system.state_dict(), 'opt':optimizer.state_dict()}, os.path.join(os.getcwd(),'files', na))
 test_N = 100000
 test_label = np.random.randint(N_symbols, size = test_N)
 

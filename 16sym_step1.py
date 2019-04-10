@@ -21,8 +21,6 @@ if N_symbols not in domain: raise ValueError('Not the correct number of symbols'
 bits = np.log2(N_symbols)
 bits = int(bits)
 print('No. of possible symbols are {}. Each symbol requires {} bits'.format(N_symbols, bits))
-const = const_range[N_symbols]
-print('Constellation range is {} -> {}'.format(const, -const))
 hidden_neurons = 100
 
 N = 500000
@@ -32,14 +30,14 @@ rate = bits/num_channels
 no_epochs =200
 batch_size = 100
 
-com_system = comm(N_symbols, num_channels, rate, batch_size, hidden_neurons=hidden_neurons)
+com_system = comm_16_1(N_symbols, num_channels, rate, batch_size, hidden_neurons=hidden_neurons)
 com_system = com_system.to(device)
 optimizer = optim.Adam(com_system.parameters(), lr = 0.0001)
 criterion = nn.CrossEntropyLoss()
 
-trans = transmitter(N_symbols, num_channels, hidden_neurons=hidden_neurons)
+trans = transmitter_16(N_symbols, num_channels, hidden_neurons=hidden_neurons)
 trans = trans.to(device)
-recv = receiver(N_symbols, num_channels, hidden_neurons=hidden_neurons)
+recv = receiver_16(N_symbols, num_channels, hidden_neurons=hidden_neurons)
 recv = recv.to(device)
 
 for epoch in range(no_epochs):
@@ -71,6 +69,8 @@ for epoch in range(no_epochs):
 
 trans.load_state(com_system.lin1, com_system.lin2,com_system.lin3, com_system.lin_c, com_system.norm1)
 recv.load_state(com_system.lin4, com_system.lin5, com_system.lin6)
+na = 'step1_16sym_final.pth'
+torch.save({'model':com_system.state_dict(), 'opt':optimizer.state_dict()}, os.path.join(os.getcwd(),'files', na))
 
 test_N = 100000
 test_label = np.random.randint(N_symbols, size = test_N)

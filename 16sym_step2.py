@@ -27,17 +27,20 @@ N = 10000
 num_channels = 2
 rate = bits/num_channels
 
-no_epochs =30
+no_epochs =1
 batch_size = 100
 
-com_system = comm(N_symbols, num_channels, rate, batch_size)
+com_system = comm_16_2(N_symbols, num_channels, rate, batch_size, hidden_neurons=hidden_neurons)
 com_system = com_system.to(device)
 optimizer = optim.Adam(com_system.parameters(), lr = 0.0001)
 criterion = nn.CrossEntropyLoss()
+na = 'step1_16sym_final.pth'
+com_system.load_state_dict(torch.load(os.path.join(os.getcwd(),'files', na))['model'])
+print('Loaded the model form previous step')
 
-trans = transmitter(N_symbols, num_channels)
+trans = transmitter_16(N_symbols, num_channels, hidden_neurons=hidden_neurons)
 trans = trans.to(device)
-recv = receiver(N_symbols, num_channels)
+recv = receiver_16(N_symbols, num_channels, hidden_neurons=hidden_neurons)
 recv = recv.to(device)
 
 for epoch in range(no_epochs):
@@ -65,8 +68,9 @@ for epoch in range(no_epochs):
     run_loss = []
 
 trans.load_state(com_system.lin1, com_system.lin2,com_system.lin3, com_system.lin_c, com_system.norm1)
-
 recv.load_state(com_system.lin4, com_system.lin5, com_system.lin6)
+na = 'step2_16sym_final.pth'
+torch.save({'model':com_system.state_dict(), 'opt':optimizer.state_dict()}, os.path.join(os.getcwd(),'files', na))
 
 test_N = 100000
 test_label = np.random.randint(N_symbols, size = test_N)
