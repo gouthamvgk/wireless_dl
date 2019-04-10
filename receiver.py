@@ -8,8 +8,8 @@ import matplotlib.pyplot as plt
 import os
 
 class receiver_4(nn.Module):
-    def __init__(self, num_sym, num_chan):
-        super(receiver, self).__init__()
+    def __init__(self, num_sym, num_chan, hidden_neurons=50):
+        super(receiver_4, self).__init__()
         self.num_symbols = num_sym
         self.num_channels = num_chan
         self.lin3 = nn.Linear(self.num_channels*2, hidden_neurons)
@@ -34,8 +34,8 @@ class receiver_4(nn.Module):
 
 
 class receiver_16(nn.Module):
-    def __init__(self, num_sym, num_chan):
-        super(receiver, self).__init__()
+    def __init__(self, num_sym, num_chan, hidden_neurons=100):
+        super(receiver_16, self).__init__()
         self.num_symbols = num_sym
         self.num_channels = num_chan
         self.lin3 = nn.Linear(self.num_channels*2, hidden_neurons)

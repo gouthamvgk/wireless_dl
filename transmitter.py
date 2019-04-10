@@ -9,8 +9,8 @@ import os
 
 
 class transmitter_4(nn.Module):
-    def __init__(self, num_sym, num_chan):
-        super(transmitter, self).__init__()
+    def __init__(self, num_sym, num_chan, hidden_neurons=50):
+        super(transmitter_4, self).__init__()
         self.num_symbols = num_sym
         self.num_channels = num_chan
         self.lin1 = nn.Linear(self.num_symbols, self.num_symbols)
@@ -41,8 +41,8 @@ class transmitter_4(nn.Module):
 
 
 class transmitter_16(nn.Module):
-    def __init__(self, num_sym, num_chan):
-        super(transmitter, self).__init__()
+    def __init__(self, num_sym, num_chan, hidden_neurons=100):
+        super(transmitter_16, self).__init__()
         self.num_symbols = num_sym
         self.num_channels = num_chan
         self.lin1 = nn.Linear(self.num_symbols, self.num_symbols)
