@@ -8,6 +8,15 @@ import matplotlib.pyplot as plt
 from noise import Noise_1
 import os
 import system
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--num_channels', type=int,default=2)
+parser.add_argument('--no_epochs', type=int,default=100)
+parser.add_argument('--batch_size', type=int,default=100)
+parser.add_argument('--lr', type=float,default=0.0001)
+parser.add_argument('--hidden_neurons', type=int,default=50)
+data = parser.parse_args()
 
 from system import comm_4_2
 from transmitter import transmitter_4
@@ -20,18 +29,18 @@ if N_symbols not in domain: raise ValueError('Not the correct number of symbols'
 bits = np.log2(N_symbols)
 bits = int(bits)
 print('No. of possible symbols are {}. Each symbol requires {} bits'.format(N_symbols, bits))
-hidden_neurons = 50
+hidden_neurons =data.hidden_neurons
 
 N = 10000
-num_channels = 2
+num_channels = data.num_channels
 rate = bits/num_channels
 
-no_epochs = 1
-batch_size = 100
+no_epochs = data.no_epochs
+batch_size = data.batch_size
 
 com_system = comm_4_2(N_symbols, num_channels, rate, batch_size, hidden_neurons=hidden_neurons)
 com_system = com_system.to(device)
-optimizer = optim.Adam(com_system.parameters(), lr = 0.0001)
+optimizer = optim.Adam(com_system.parameters(), lr = data.lr)
 criterion = nn.CrossEntropyLoss()
 na = 'step1_4sym_final.pth'
 com_system.load_state_dict(torch.load(os.path.join(os.getcwd(),'files', na))['model'])

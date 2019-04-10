@@ -8,6 +8,17 @@ import matplotlib.pyplot as plt
 from noise import GaussianNoise
 import os
 import system
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--num_channels', type=int,default=2)
+parser.add_argument('--no_epochs', type=int,default=200)
+parser.add_argument('--batch_size', type=int,default=100)
+parser.add_argument('--lr', type=float,default=0.0001)
+parser.add_argument('--hidden_neurons', type=int,default=100)
+parser.add_argument('--resume', default=False, action="store_true", help="flag to indicate resume training")
+parser.add_argument('--res_ckpt',type=str, help="resume checkpoint name")
+data = parser.parse_args()
 
 from system import comm_16_1
 from transmitter import transmitter_16
@@ -21,19 +32,21 @@ if N_symbols not in domain: raise ValueError('Not the correct number of symbols'
 bits = np.log2(N_symbols)
 bits = int(bits)
 print('No. of possible symbols are {}. Each symbol requires {} bits'.format(N_symbols, bits))
-hidden_neurons = 100
+hidden_neurons = data.hidden_neurons
 
 N = 500000
-num_channels = 2
+num_channels = data.num_channels
 rate = bits/num_channels
 
-no_epochs =200
-batch_size = 100
+no_epochs =data.no_epochs
+batch_size = data.batch_size
 
 com_system = comm_16_1(N_symbols, num_channels, rate, batch_size, hidden_neurons=hidden_neurons)
 com_system = com_system.to(device)
-optimizer = optim.Adam(com_system.parameters(), lr = 0.0001)
+optimizer = optim.Adam(com_system.parameters(), lr = data.lr)
 criterion = nn.CrossEntropyLoss()
+if data.resume:
+    com_system.load_state_dict(torch.load(os.path.join(os.getcwd(),'files', data.res_ckpt))['model'])
 
 trans = transmitter_16(N_symbols, num_channels, hidden_neurons=hidden_neurons)
 trans = trans.to(device)
