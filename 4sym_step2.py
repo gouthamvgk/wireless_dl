@@ -26,7 +26,7 @@ N = 10000
 num_channels = 2
 rate = bits/num_channels
 
-no_epochs = 50
+no_epochs = 100
 batch_size = 100
 
 com_system = comm_4_2(N_symbols, num_channels, rate, batch_size)
