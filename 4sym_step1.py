@@ -35,9 +35,9 @@ optimizer = optim.Adam(com_system.parameters(), lr = 0.0001)
 criterion = nn.CrossEntropyLoss()
 
 
-trans = transmitter_4(N_symbols, num_channels)
+trans = transmitter_4(N_symbols, num_channels, hidden_neurons=hidden_neurons)
 trans = trans.to(device)
-recv = receiver_4(N_symbols, num_channels)
+recv = receiver_4(N_symbols, num_channels, hidden_neurons=hidden_neurons)
 recv = recv.to(device)
 
 
@@ -71,7 +71,8 @@ for epoch in range(no_epochs):
 
 trans.load_state(com_system.lin1, com_system.lin2,com_system.lin3, com_system.lin_c, com_system.norm1)
 recv.load_state(com_system.lin4, com_system.lin5, com_system.lin6)
-
+na = 'step1_4sym_final.pth'
+torch.save({'model':com_system.state_dict(), 'opt':optimizer.state_dict()}, os.path.join(os.getcwd(),'files', na))
 test_N = 100000
 test_label = np.random.randint(N_symbols, size = test_N)
 

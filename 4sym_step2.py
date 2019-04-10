@@ -29,15 +29,16 @@ rate = bits/num_channels
 no_epochs = 100
 batch_size = 100
 
-com_system = comm_4_2(N_symbols, num_channels, rate, batch_size)
+com_system = comm_4_2(N_symbols, num_channels, rate, batch_size, hidden_neurons=hidden_neurons)
 com_system = com_system.to(device)
 optimizer = optim.Adam(com_system.parameters(), lr = 0.0001)
 criterion = nn.CrossEntropyLoss()
+na = 'step1_4sym_final.pth'
+com_system.load_state_dict(torch.load(os.path.join(os.getcwd(),'files', na)['model'])
 
-
-trans = transmitter_4(N_symbols, num_channels)
+trans = transmitter_4(N_symbols, num_channels, hidden_neurons=hidden_neurons)
 trans = trans.to(device)
-recv = receiver_4(N_symbols, num_channels)
+recv = receiver_4(N_symbols, num_channels, hidden_neurons=hidden_neurons)
 recv = recv.to(device)
 
 
