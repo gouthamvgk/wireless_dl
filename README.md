@@ -31,3 +31,10 @@ All the above commands can be run with following command line arguments
  - --batch_size -> Batch size to be used for training
  - --lr -> Learning rate for gradient updates
  - --hidden_neurons -> No of neurons in the hidden layers
+
+### REFERENCES
+1. [Sebastian Dörner, Sebastian Cammerer, Jakob Hoydis and Stephan ten Brink (2018) ‘Deep Learning Based Communication Over the Air](https://arxiv.org/pdf/1707.03384.pdf)’
+
+2. [Tim O’Shea and Jakob Hoydis (2017) ‘An Introduction to Deep Learning for the Physical Layer’](https://arxiv.org/pdf/1702.00832.pdf)
+
+3. [Timothy J. O'Shea, Kiran Karra and T. Charles Clancy (2017) ‘Learning to communicate: Channel auto-encoders, domain specific regularizers, and attention](https://arxiv.org/pdf/1608.06409.pdf)
