@@ -3,7 +3,7 @@
 This repo contains the code for my final year project which is to implement a wireless communication system using neural network instead of traditional algorithms.
 
 ## CONCEPT
-Communication algorithms in practice use a mathematical model which is derived from mathematical analysis.  These systems are very complex and requires a lot of knowledge about the channel.  Here a instead of the traditional algorithms a two sided neural network structure called Autoencoder is implemented to replace it.
+Communication algorithms in practice use a mathematical model which is derived from mathematical analysis.  These systems are very complex and requires a lot of knowledge about the channel.  Here instead of the traditional algorithms a two sided neural network structure called Autoencoder is implemented to replace it.
 The Autoencoder has two neural networks for transmitter and receiver.  They are trained jointly with channel layer in the middle where different type of noises are added.
 
 ### DEPENDENCIES
